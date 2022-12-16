@@ -2,23 +2,6 @@
   Export CSV
 </button>
 
-
-<script>
-  jQuery('#export-html-form-csv').on('click', (e) => {
-    e.preventDefault();
-    jQuery
-      .ajax({
-        url: wpApiSettings.root + 'export-html-forms/v1/download?form_id=21',
-        method: 'GET',
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader('X-WP-Nonce', wpApiSettings.nonce);
-        },
-      })
-      .done(function(response) {
-        console.log(response);
-      });
-  });
-</script>
 <style>
   .export-button {
     position: absolute;

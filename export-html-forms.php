@@ -16,7 +16,7 @@ add_action('plugins_loaded', function () {
 
 
 add_action('admin_enqueue_scripts', function () {
-  wp_enqueue_script('export-html-forms', esc_url(get_template_directory_uri()) . 'export-html-forms.js', array(), null, TRUE);
+  wp_enqueue_script('export-html-forms', plugin_dir_url(__FILE__) . '/export-html-forms.js', array(), null, TRUE);
   wp_add_inline_script('export-html-forms', 'const wpApiSettings = ' . json_encode([
     'root' => esc_url_raw(rest_url()),
     'nonce' => wp_create_nonce('wp_rest'),
