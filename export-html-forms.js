@@ -12,19 +12,43 @@ jQuery('#export-html-form-csv').on('click', (e) => {
       },
     })
     .done(function (response) {
+      const highestNumberOfKeys = Math.max(
+        ...Object.values(response).map((x) => Object.keys(x.data).length)
+      );
+
+      const indexOfHighestNumberOfKeys = Object.values(response).findIndex(
+        (x) => Object.keys(x.data).length === highestNumberOfKeys
+      );
+
+      let dataHeaders = Object.keys(
+        response[Object.keys(response)[indexOfHighestNumberOfKeys]].data
+      );
       let headers = [
-        ...Object.keys(response[1].data),
-        ...Object.keys(response[1]).filter((key) => key !== 'data'),
+        ...dataHeaders,
+        ...Object.keys(response[Object.keys(response)[0]]).filter(
+          (key) => key !== 'data'
+        ),
       ];
       let values = Object.values(response)
         .map((value) => [
-          ...Object.values(value.data),
+          ...dataHeaders.map((x) => {
+            if (value.data.hasOwnProperty(x)) {
+              if (typeof value.data[x] === 'object') {
+                return Object.values(value.data[x]).join(', ');
+              }
+              return value.data[x];
+            } else {
+              return '';
+            }
+          }),
           ...Object.keys(value)
             .filter((key) => key !== 'data')
             .map((key) => value[key]),
         ])
         .reverse();
-      let csv = arrayToCsv([headers, ...values]);
+
+      let data = [headers, ...values];
+      let csv = arrayToCsv(data);
       downloadBlob(csv, 'export.csv', 'text/csv;charset=utf-8;');
     });
 });
