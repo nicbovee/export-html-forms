@@ -16,12 +16,14 @@ jQuery('#export-html-form-csv').on('click', (e) => {
         ...Object.keys(response[1].data),
         ...Object.keys(response[1]).filter((key) => key !== 'data'),
       ];
-      let values = Object.values(response).map((value) => [
-        ...Object.values(value.data),
-        ...Object.keys(value)
-          .filter((key) => key !== 'data')
-          .map((key) => value[key]),
-      ]);
+      let values = Object.values(response)
+        .map((value) => [
+          ...Object.values(value.data),
+          ...Object.keys(value)
+            .filter((key) => key !== 'data')
+            .map((key) => value[key]),
+        ])
+        .reverse();
       let csv = arrayToCsv([headers, ...values]);
       downloadBlob(csv, 'export.csv', 'text/csv;charset=utf-8;');
     });

@@ -4,7 +4,7 @@
  * Plugin Name: Export HTML Forms
  * Plugin URI: https://github.com/nicbovee/export-html-forms
  * Description: Export HTML Forms submissions to CSV.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires PHP: 7.4
  * Author: nicbovee
  * Author URI: https://github.com/nicbovee
