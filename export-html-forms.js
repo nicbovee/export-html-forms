@@ -24,6 +24,7 @@ jQuery('#export-html-form-csv').on('click', (e) => {
     });
 });
 
+// from https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side#answer-68146412
 function arrayToCsv(data) {
   return data
     .map(
@@ -37,6 +38,7 @@ function arrayToCsv(data) {
     .join('\r\n'); // rows starting on new lines
 }
 
+// from https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side#answer-68146412
 function downloadBlob(content, filename, contentType) {
   // Create a blob
   var blob = new Blob([content], { type: contentType });
